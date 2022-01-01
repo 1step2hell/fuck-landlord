@@ -2,6 +2,7 @@ package com.step2hell.poker
 
 import com.step2hell.poker.card.*
 import com.step2hell.poker.suit.Suit
+import com.step2hell.poker.util.shuffle
 
 object Deck {
     private val classes: List<Class<out Card>> = listOf(
@@ -20,7 +21,7 @@ object Deck {
         Ace::class.java
     )
 
-    val cards: MutableList<Card> = MutableList(54) {
+    val cards: Array<Card> = Array(54) {
         val index = it / 4
         val mod = it % 4
         if (it < 4 * classes.size) {
