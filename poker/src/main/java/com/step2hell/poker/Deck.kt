@@ -2,6 +2,8 @@ package com.step2hell.poker
 
 import com.step2hell.poker.card.*
 import com.step2hell.poker.suit.Suit
+import com.step2hell.poker.util.isEven
+import com.step2hell.poker.util.isOdd
 import com.step2hell.poker.util.shuffle
 
 object Deck {
@@ -25,15 +27,9 @@ object Deck {
         val index = it / 4
         val mod = it % 4
         if (it < 4 * classes.size) {
-            val suit: Suit = when (mod) {
-                0 -> Suit.Spade
-                1 -> Suit.Heart
-                2 -> Suit.Club
-                else -> Suit.Diamond
-            }
-            classes[index].getDeclaredConstructor(Suit::class.java).newInstance(suit)
+            classes[index].getDeclaredConstructor(Suit::class.java).newInstance(Suit.from(mod))
         } else {
-            if (mod == 0) Joker.Black else Joker.Red
+            if (it.isEven) Joker.Black else Joker.Red
         }
     }
 
